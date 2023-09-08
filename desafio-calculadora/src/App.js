@@ -44,6 +44,30 @@ const App = () => {
     }
   };
 
+  const handleDivNumbers = () => {
+    if(firstNumber === '0') {
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0');
+      setOperation('/');
+    } else {
+      const sum = Number(firstNumber) / Number(currentNumber);
+      setCurrentNumber(String(sum));
+      setOperation('');
+    }
+  };
+
+  const handleMultNumbers = () => {
+    if(firstNumber === '0') {
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0');
+      setOperation('*');
+    } else {
+      const sum = Number(firstNumber) * Number(currentNumber);
+      setCurrentNumber(String(sum));
+      setOperation('');
+    }
+  };
+
   const handleEquals = () => {
     if(firstNumber !== '0' && operation !== '' && currentNumber !== '0') {
       switch(operation) {
@@ -53,10 +77,20 @@ const App = () => {
         case '-':
           handleMinusNumbers();
         break;
+        case '/':
+          handleDivNumbers();
+        break;
+        case '*':
+          handleMultNumbers();
+        break;
         default: break;
       }
     }
   };
+
+  const showKitten = () => {
+    alert("^•ﻌ•^ฅ♡");
+  }
 
   return (
     <Container>
@@ -64,10 +98,10 @@ const App = () => {
         <Input value={currentNumber}/>
 
         <Row>
-          <Button label="X" onClick={() => handleAddNumber('X')} />
-          <Button label="/" onClick={() => handleAddNumber('/')} />
+          <Button label="X" onClick={handleMultNumbers} />
+          <Button label="/" onClick={handleDivNumbers} />
           <Button label="C" onClick={handleOnClear}/>
-          <Button label="😸" />
+          <Button label="😸" onClick={showKitten}/>
         </Row>
 
         <Row>
@@ -92,6 +126,9 @@ const App = () => {
         </Row>
 
       </Content>
+
+      <p>Made by LarissaRC</p>
+      
     </Container>
   );
 }
